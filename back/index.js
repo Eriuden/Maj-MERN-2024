@@ -2,6 +2,9 @@ const express = require("express")
 const {notFound, errorHandler} = require("./middleware/errorMiddleware")
 const port = process.env.PORT
 import userRoutes from "./routes/userRoutes"
+import connectDB from "./config/db"
+
+connectDB()
 
 const app = express()
 
