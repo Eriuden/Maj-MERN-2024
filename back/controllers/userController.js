@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler"
 import User from "../models/userModel"
+import generateWebToken from "../utils/genToken"
 
 module.exports.authUser = asyncHandler(async(req,res) => {
     res.status(200).json({message:"auth"})
@@ -22,6 +23,7 @@ module.exports.registerUser = asyncHandler(async(req,res) => {
     })
 
     if (user) {
+        generateWebToken(res, user._id)
         res.status(201).json({
             _id: user._id,
             name: user.name,
