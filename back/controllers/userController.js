@@ -51,7 +51,12 @@ module.exports.registerUser = asyncHandler(async(req,res) => {
 })
 
 module.exports.logoutUser = asyncHandler(async(req,res) => {
-    res.status(200).json({message:"Déconnecté"})
+    res.cookie("jwt", "", {
+        httpOnly: true,
+        expires: new Date(0)
+    })
+
+    res.status(200).json({message: "Déconnexion"})
 })
 
 module.exports.getUserProfile = asyncHandler(async(req,res) => {
