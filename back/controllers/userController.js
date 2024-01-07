@@ -3,7 +3,21 @@ import User from "../models/userModel"
 import generateWebToken from "../utils/genToken"
 
 module.exports.authUser = asyncHandler(async(req,res) => {
-    res.status(200).json({message:"auth"})
+    const {email,password} = req.body
+
+    const user = await User.findOne({email})
+
+    if (user && (await user.matchPassword(password))) {
+        generateWebToken(res,user._id)
+        res.status(201).json({
+            _id: user._id,
+            name:user.name,
+            email:user.email,
+        })
+    } else {
+        res.status(400)
+        throw new Error("email ou mot de passe invalide")
+    }
 })
 
 module.exports.registerUser = asyncHandler(async(req,res) => {
