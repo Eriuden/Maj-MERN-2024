@@ -60,7 +60,13 @@ module.exports.logoutUser = asyncHandler(async(req,res) => {
 })
 
 module.exports.getUserProfile = asyncHandler(async(req,res) => {
-    res.status(200).json({message:"Profil utilisateur"})
+
+    const user = {
+        _id: req.user._id,
+        name:req.user.name,
+        email: req.user.email
+    }
+    res.status(200).json(user)
 })
 
 module.exports.updateUserProfile = asyncHandler(async(req,res) => {
