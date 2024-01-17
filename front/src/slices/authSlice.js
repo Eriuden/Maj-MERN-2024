@@ -21,8 +21,8 @@ reducers: {
 }
 })
 
-export const authSlice = () => {
-  return (
-    <div>authSlice</div>
-  )
-}
+export const { setCredentials, logout} = sliceAuth.actions
+
+export default sliceAuth.reducer
+
+
