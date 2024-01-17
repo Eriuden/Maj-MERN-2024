@@ -2,7 +2,7 @@ import {configureStore} from "@reduxjs/toolkit"
 
 const store = configureStore({
     reducer: {},
-    middleware: (getDefauyltMiddleware) => getDefauyltMiddleware(),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
     devTools: true 
 })
 
