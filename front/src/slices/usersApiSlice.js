@@ -8,11 +8,17 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                 url: `${process.env.USERS_URL}/auth`,
                 method: 'POST',
                 body: data 
+            }),
+        }),
+        logout: builder.mutation({
+            query: () => ({
+                url: `${USERS_URL}/logout`,
+                method: "POST",
             })
-        })
+        })  
     })
 })
 
 //Convention de nommage use + fonction + mutation
-export const { useLoginMutation } = usersApiSlice
+export const { useLoginMutation, useLogoutMutation } = usersApiSlice
 
