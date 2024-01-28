@@ -28,6 +28,14 @@ export const RegisterScreen = () => {
         e.preventDefault()
         if (password !== passwordControl) {
             window.alert("Les mots de passe ne correspondent pas")
+        } else {
+            try {
+                const res = await register({ name, email, password}).unwrap()
+                dispatch(setCredentials({...res}))
+                navigate("/")
+            } catch (err) {
+                
+            }
         }
     }
   return (
