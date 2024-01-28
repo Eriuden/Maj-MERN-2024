@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { FormContainer } from '../components/FormContainer'
 import { useDispatch, useSelector } from 'react-redux'
+import { useRegisterMutation } from '../slices/usersApiSlice'
+import { setCredentials } from '../slices/authSlice'
+import { useNavigate } from 'react-router-dom'
 
 export const RegisterScreen = () => {
     const [name,setName] = useState("")
@@ -10,9 +13,22 @@ export const RegisterScreen = () => {
     const [password,setPassword] = useState("")
     const [passwordControl, setPasswordControl] = useState("")
 
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const {userInfo} = useSelector((state)=> state.auth)
+
+    useEffect(()=> {
+        if (userInfo) {
+            navigate("/")
+        }
+    }, [ navigate, userInfo])
+
     const submitHandler = async(e) => {
         e.preventDefault()
-        console.log("submit")
+        if (password !== passwordControl) {
+            window.alert("Les mots de passe ne correspondent pas")
+        }
     }
   return (
     <div>
