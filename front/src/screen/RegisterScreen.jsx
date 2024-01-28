@@ -16,6 +16,8 @@ export const RegisterScreen = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
+    const [register, { isLoading}] = useLoginMutation()
+
     const {userInfo} = useSelector((state)=> state.auth)
 
     useEffect(()=> {
@@ -34,7 +36,7 @@ export const RegisterScreen = () => {
                 dispatch(setCredentials({...res}))
                 navigate("/")
             } catch (err) {
-                
+                window.alert(err)
             }
         }
     }
