@@ -1,7 +1,8 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { FormContainer } from '../components/FormContainer'
+import { useDispatch, useSelector } from 'react-redux'
 
 export const RegisterScreen = () => {
     const [name,setName] = useState("")
