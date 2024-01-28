@@ -16,7 +16,7 @@ export const RegisterScreen = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const [register, { isLoading}] = useLoginMutation()
+    const [register, { isLoading}] = useRegisterMutation()
 
     const {userInfo} = useSelector((state)=> state.auth)
 
