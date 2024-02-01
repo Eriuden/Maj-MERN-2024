@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { FormContainer } from '../components/FormContainer'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCredentials } from '../slices/authSlice'
-import { useNavigate } from 'react-router-dom'
+import { useUpdateUserMutation } from '../slices/usersApiSlice'
 
 export const ProfileScreen = () => {
     const [name,setName] = useState("")
@@ -11,10 +11,11 @@ export const ProfileScreen = () => {
     const [password,setPassword] = useState("")
     const [passwordControl, setPasswordControl] = useState("")
 
-    const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const {userInfo} = useSelector((state)=> state.auth)
+
+    const updateProfile = useUpdateUserMutation()
 
     useEffect(()=> {
         setName(userInfo.name) 
@@ -27,7 +28,17 @@ export const ProfileScreen = () => {
         if (password !== passwordControl) {
             window.alert("Les mots de passe ne correspondent pas")
         } else {
-            
+            try {
+              const res = await updateProfile({
+                _id: userInfo._id,
+                name,
+                email,
+                password
+              }).unwrap()
+              dispatch(setCredentials({...res}))
+            } catch (error) {
+              window.alert(err)
+            }
         }
     }
   return (
